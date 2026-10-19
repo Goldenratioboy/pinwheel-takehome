@@ -3,6 +3,7 @@ import { program } from 'commander';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { retrieveADPPage } from './browser.js';
+import { predictNextMonth } from './predictions.js';
 
 import {
   selectMonthPrompt,
@@ -61,6 +62,8 @@ while (running) {
       } else {
         // Get next month predictions for the given category
         console.log('TODO...');
+
+        await predictNextMonth(primaryAnswer.action);
       }
       break;
     case 'Quit':

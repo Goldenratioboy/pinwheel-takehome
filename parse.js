@@ -10,38 +10,6 @@ import csv from 'csv-parser';
 import { months } from './promptHelpers.js';
 
 /**
- * Gets all private employment data
- * @param {*} year
- * @param {*} month
- */
-const getTotalAbsData = (year, month) => {
-  const results = [];
-  console.log('ARE WE COMING INTO getTotalAbsData()?');
-  fs.createReadStream('line_national.csv')
-    .pipe(csv())
-    .on('data', (row) => {
-      results.push(row);
-    })
-    .on('end', () => {
-      const rowOfInterest = results.filter((obj) => {
-        const date = new Date(obj.date);
-        const dateYear = date.getFullYear();
-        const dateMonth = date.getUTCMonth();
-
-        // Compares year and numerical value for date
-        return year === dateYear && dateMonth === months.indexOf(month);
-      });
-      console.log(
-        `Number of ppl employed ${rowOfInterest[0]['Private Employment']} on following date: ${rowOfInterest[0]['date']}`,
-      );
-    })
-    .on('error', (err) => {
-      console.log(err);
-      console.log('error reading csv file');
-    });
-};
-
-/**
  * Parses csv data from a particular file using filename
  *
  * Keyword is used to console log accurate data summary
@@ -50,7 +18,13 @@ const getTotalAbsData = (year, month) => {
  * @param {*} year
  * @param {*} month
  */
-const parseCsvData = async (filename, keyword, year, month) => {
+export const parseCsvData = async (
+  filename,
+  keyword,
+  year,
+  month,
+  returnDataInstead = false,
+) => {
   const results = [];
 
   await new Promise((resolve, reject) => {
@@ -60,6 +34,12 @@ const parseCsvData = async (filename, keyword, year, month) => {
         results.push(row);
       })
       .on('end', () => {
+        // Return early if we're parsing CSV for
+        // next month's predictions
+        if (returnDataInstead) {
+          resolve(results);
+          return;
+        }
         const rowsOfInterest = results.filter((obj) => {
           const date = new Date(obj.date);
           const dateYear = date.getFullYear();
@@ -86,6 +66,8 @@ const parseCsvData = async (filename, keyword, year, month) => {
         reject();
       });
   });
+
+  return results;
 };
 
 export const parseNumberFromCsv = async (tableName, year, month) => {

@@ -17,7 +17,8 @@
     "commander": "^15.0.0",
     "csv-parser": "^3.2.1",
     "inquirer": "^14.2.3",
-    "playwright": "^1.64.1"
+    "playwright": "^1.64.1",
+    "regression": "^2.0.1"
   },
   "bin": {
     "pinwheel-cli": "./index.js"
