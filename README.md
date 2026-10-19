@@ -7,6 +7,7 @@ The CLI tool uses playwright to navigate to the aforementioned ADP website and s
 ## Installation
 
 ```bash
+cd take-home
 npm install -g pinwheel-cli
 npx playwright install
 ```
@@ -57,10 +58,12 @@ Industry: "Trade, transportation, and utilities" # of ppl: 26246000.0
 
 ### How I evaluated forecast accuracy
 
-- Ensured that next month prediction numbers were larger than current month since I'm using linear regression
+- I'm using linear regression so I was able to evaluate answers against the derived linear regression equation
 
 ### What I'd update if I had more time
 
 - Make it so ADP wasn't parsed on every cli session
 - Update csv parsing so it doesn't happen every data exploration
 - Add more error logging
+- Add some more robustness around CSV file formats, urls, etc.
+- unit tests
