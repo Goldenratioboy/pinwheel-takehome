@@ -1,8 +1,8 @@
 # Pinwheel ADP CLI
 
-CLI to interact w/ ADP data parsed from the ADP website https://adpemploymentreport.com/
+CLI to interact with ADP data parsed from the ADP website https://adpemploymentreport.com/
 
-The CLI tool uses playwright to navigate to the aforementioned ADP website and save off all .csv resources
+The CLI tool uses playwright to navigate to the aforementioned ADP website and save off all csv requests that the browser makes.
 
 ## Installation
 
@@ -15,9 +15,9 @@ npx playwright install # installs required playwright browsers
 
 ### Usage
 
-Opening terminal and performing `pinwheel-cli` will launch the interactive terminal session.
+Opening terminal and typing `pinwheel-cli` will launch the interactive terminal session.
 
-Initialization process saves off .csv files that the CLI can read.
+Initialization process launches playwright and saves off .csv files that the CLI can then read.
 
 Once initialization is finished, you'll have various choices in how you want to explore the data.
 
@@ -28,7 +28,7 @@ For example, I can select
 > Historical
 ```
 
-To then be prompted to type in a search year && select a month
+To then be prompted to type in a search year & select a month
 
 ```
 > Type in your search year:
