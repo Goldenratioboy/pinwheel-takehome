@@ -1,0 +1,26 @@
+{
+  "name": "pinwheel-take-home",
+  "version": "1.0.0",
+  "description": "pinwheel take-home project to parse and estimate ADP numbers",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "TODO"
+  },
+  "author": "jpilling",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^6.0.1",
+    "commander": "^15.0.0",
+    "csv-parser": "^3.2.1",
+    "inquirer": "^14.2.3",
+    "playwright": "^1.64.1"
+  },
+  "bin": {
+    "pinwheel-cli": "./index.js"
+  },
+  "type": "module"
+}
