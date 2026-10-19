@@ -26,24 +26,39 @@ export const predictNextMonth = async (category) => {
   );
 
   const linearData = parseDataToLinearForm(data);
-
-  const result = regression.linear(linearData);
-
-  const dataPointToPredict = linearData.length + 1;
-  const resultFromRegressionModel = result.predict(dataPointToPredict)[1];
-  console.log("Next Month's Estimate: ", resultFromRegressionModel);
+  for (const k of Object.keys(linearData)) {
+    const result = regression.linear(linearData[k]);
+    const dataPointToPredict = linearData[k].length + 1;
+    const resultFromRegressionModel = result.predict(dataPointToPredict)[1];
+    console.log(`Next Month's Estimate for ${k}`, resultFromRegressionModel);
+  }
 };
 
 /**
  * Parses data to linear form for regression.linear()
+ *
+ * handles 1 -> n linear models
  */
 const parseDataToLinearForm = (data) => {
-  // Should be list of tuples
-  const linearResult = [];
-  for (let i = 0; i < data.length; i++) {
-    const numberOfPpl = Number(data[i]['Private Employment']);
-    linearResult.push([i, numberOfPpl]);
+  // Contains a map of linear regression functions
+  // {Construction -> array of tuples, Information: array of tuples, etc.}
+  const linearMap = {};
+
+  // We're making an assumption here that all data is the same shape
+  for (const k of Object.keys(data[0])) {
+    const linearResult = [];
+    if (k === 'date') {
+      continue;
+    }
+
+    // Builds a linear array for a given category 'k'
+    for (let i = 0; i < data.length; i++) {
+      const numberOfPpl = Number(data[i][k]);
+      linearResult.push([i, numberOfPpl]);
+    }
+
+    linearMap[k] = linearResult;
   }
 
-  return linearResult;
+  return linearMap;
 };

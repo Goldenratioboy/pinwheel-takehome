@@ -60,9 +60,7 @@ while (running) {
           month.action,
         );
       } else {
-        // Get next month predictions for the given category
-        console.log('TODO...');
-
+        // Get next month's predictions for given category
         await predictNextMonth(primaryAnswer.action);
       }
       break;
