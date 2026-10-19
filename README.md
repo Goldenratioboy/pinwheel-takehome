@@ -8,8 +8,9 @@ The CLI tool uses playwright to navigate to the aforementioned ADP website and s
 
 ```bash
 cd take-home
-npm install -g pinwheel-cli
-npx playwright install
+npm i
+npm link # allows us to use `pinwheel-cli` on terminal
+npx playwright install # installs required playwright browsers
 ```
 
 ### Usage
